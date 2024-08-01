@@ -1,3 +1,6 @@
+/**
+ * Utility packages to handle Exceptions and Aspects
+ */
 package com.rewards.utility;
 
 import java.time.LocalDateTime;
@@ -15,12 +18,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.rewards.exception.CustomerRewardPointException;
 
+/**
+ * ExceptionControllerAdvice class to handle various exceptions
+ */
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
 	@Autowired
 	Environment environment;
 
-	//Exception handled when any internal error found
+	/**
+	 * Exception handled when any internal error found
+	 * @param exception
+	 * @return ResponseEntity
+	 */
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorInfo> exceptionHandler(Exception exception) {
 		ErrorInfo error = new ErrorInfo();
@@ -30,7 +40,11 @@ public class ExceptionControllerAdvice {
 		return new ResponseEntity<ErrorInfo>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	//Exception handled when Customer data not found in DB
+	/**
+	 * Exception handled when Customer data not found in DB
+	 * @param exception
+	 * @return ResponseEntity
+	 */
 	@ExceptionHandler(CustomerRewardPointException.class)
 	public ResponseEntity<ErrorInfo> infyBankexceptionHandler(CustomerRewardPointException exception) {
 		ErrorInfo error = new ErrorInfo();
@@ -40,7 +54,11 @@ public class ExceptionControllerAdvice {
 		return new ResponseEntity<ErrorInfo>(error, HttpStatus.NOT_FOUND);
 	}
 	
-	//Exception handled for invalid format data 
+	/**
+	 * Exception handled for invalid format data 
+	 * @param exception
+	 * @return ResponseEntity
+	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorInfo> exceptionHandler(MethodArgumentNotValidException exception) {
 			ErrorInfo errorInfo = new ErrorInfo();
@@ -54,7 +72,11 @@ public class ExceptionControllerAdvice {
 			return new ResponseEntity<>(errorInfo, HttpStatus.BAD_REQUEST);
 	}
 	 
-    //Exception handled for invalid format for path variable
+	/**
+	 * Exception handled for invalid format for path variable
+	 * @param exception
+	 * @return ResponseEntity
+	 */
 	@ExceptionHandler(ConstraintViolationException.class)
 	public ResponseEntity<ErrorInfo> pathExceptionHandler(ConstraintViolationException exception) {
 
