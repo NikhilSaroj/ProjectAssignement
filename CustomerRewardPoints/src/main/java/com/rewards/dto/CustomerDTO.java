@@ -1,3 +1,6 @@
+/*
+ Data Transfer Object package 
+ */
 package com.rewards.dto;
 
 import java.time.LocalDate;
@@ -9,6 +12,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 
+/**
+ * CustomerDTO class to get and set the Customer values
+ */
 public class CustomerDTO {
 
 	private Integer customerId;
@@ -40,34 +46,58 @@ public class CustomerDTO {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	/**
+	 * @return the customerId
+	 */
 	public Integer getCustomerId() {
 		return customerId;
 	}
 
+	/**
+	 * @param customerId the customerId to set
+	 */
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
 
+	/**
+	 * @return the emailId
+	 */
 	public String getEmailId() {
 		return emailId;
 	}
 
+	/**
+	 * @param emailId the emailId to set
+	 */
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return the dateOfBirth
+	 */
 	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
+	/**
+	 * @param dateOfBirth the dateOfBirth to set
+	 */
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
