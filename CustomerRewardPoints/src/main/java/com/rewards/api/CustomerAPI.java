@@ -1,4 +1,7 @@
-	package com.rewards.api;
+/**
+ * Main Controller class which provides the Rest Endpoints
+ */
+package com.rewards.api;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +29,9 @@ import com.rewards.service.RewardPointsService;
 
 import jakarta.validation.Valid;
 
-//Controller class
+/**
+ * Controller class name CustomerAPI
+ */
 @RestController
 @RequestMapping(path = "/reward")
 @Validated
@@ -41,28 +46,46 @@ public class CustomerAPI {
 	@Autowired
 	private RewardPointsService rewardPointsService;
 
-	//API end point to get the all Customers transactions 
+	/**
+	 * API end point to get the all Customers transactions 
+	 * @return
+	 * @throws CustomerRewardPointException
+	 */
 	@GetMapping(path = "/customersTransaction")
 	public ResponseEntity<List<CustomerTransactionDTO>> getAllCustomersTransactions() throws CustomerRewardPointException {
 		List<CustomerTransactionDTO> customerList = customerService.getAllCustomersTransactions();
 		return new ResponseEntity<>(customerList, HttpStatus.OK);
 	}
 
-	//API end point to get the specific Customer transactions by given transaction ID
+	/**
+	 * API end point to get the specific Customer transactions by given transaction ID
+	 * @param transactId
+	 * @return
+	 * @throws CustomerRewardPointException
+	 */
 	@GetMapping(path = "/customersTransaction/{transactId}")
 	public ResponseEntity<CustomerTransactionDTO> getCustomerTransactions(@PathVariable (value="transactId") Integer transactId) throws CustomerRewardPointException {
 		CustomerTransactionDTO customer = customerService.getCustomerTransactions(transactId);
 		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 	
-	//API end point to get all the customer details
+	/**
+	 * API end point to get all the customer details
+	 * @return
+	 * @throws CustomerRewardPointException
+	 */
 	@GetMapping(value = "/customers")
 	public ResponseEntity<List<CustomerDTO>> getAllCustomers() throws CustomerRewardPointException {
 		List<CustomerDTO> customerList = customerService.getAllCustomers();
 		return new ResponseEntity<>(customerList, HttpStatus.OK);
 	}
 
-	//API end point to create Customer record in Customer table
+	/**
+	 * API end point to create Customer record in Customer table
+	 * @param customer
+	 * @return
+	 * @throws CustomerRewardPointException
+	 */
 	@PostMapping(value = "/customers")
 	public ResponseEntity<String> addCustomer(@Valid @RequestBody CustomerDTO customer) throws CustomerRewardPointException {
 		Integer customerId = customerService.addCustomer(customer);
@@ -70,7 +93,12 @@ public class CustomerAPI {
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 	
-	//API end point to updates emailId for the given customer ID
+	/**
+	 * API end point to update Customer email ID record in Customer table
+	 * @param customer
+	 * @return
+	 * @throws CustomerRewardPointException
+	 */
 	@PutMapping(value="/customers/{customerId}")
 	public ResponseEntity<String> updateCustomer(@PathVariable(value="customerId") Integer customerId,@Valid @RequestBody CustomerDTO customer) throws CustomerRewardPointException  {
 		//TODO: process PUT request
@@ -79,7 +107,12 @@ public class CustomerAPI {
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
 	
-	//API end point to deletes the customer record by given customer ID
+	/**
+	 * API end point to deletes the customer record by given customer ID
+	 * @param customerId
+	 * @return
+	 * @throws CustomerRewardPointException
+	 */
 	@DeleteMapping(value="/customers/{customerId}")
 	public ResponseEntity<String> deleteCustomer(@PathVariable(value="customerId") Integer customerId) throws CustomerRewardPointException{		
 		customerService.deleteCustomer(customerId);
@@ -87,7 +120,10 @@ public class CustomerAPI {
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
 
-	//API end point to get the Reward points for each customer transactions
+	/**
+	 * API end point to get the Reward points for each customer transactions
+	 * @return
+	 */
 	@GetMapping(path = "/rewardPoints")
 	public Map<Integer, RewardPointsDTO> getRewardPoints(){
 		return rewardPointsService.getRewardPoints();
