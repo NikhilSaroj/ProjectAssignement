@@ -1,3 +1,6 @@
+/**
+ * Service package to define actual business logic
+ */
 package com.rewards.service;
 
 import java.time.LocalDate;
@@ -13,14 +16,19 @@ import com.rewards.dto.RewardPointsDTO;
 import com.rewards.entity.CustomerTransaction;
 import com.rewards.repository.CustomerTransactionRepository;
 
-//Reward points calculation logic
+/**
+ * class for RewardPointsService
+ */
 @Service
 public class RewardPointsService {
 	
 	@Autowired
 	private CustomerTransactionRepository customerTransactionRepository;
 	
-	//To calculate the monthly reward points and total reward points for each customer
+	/**
+	 * To calculate the monthly reward points and total reward points for each customer
+	 * @return customerPoints
+	 */
 	public Map<Integer, RewardPointsDTO> getRewardPoints(){
 		List<CustomerTransaction> transactions = customerTransactionRepository.findAll();
 		Map<Integer, RewardPointsDTO> customerPoints = new HashMap<>();
@@ -38,7 +46,11 @@ public class RewardPointsService {
 		return customerPoints;
 	}
 	
-	//Logic for calculation of reward point
+	/**
+	 * Logic for calculation of reward point
+	 * @param amount
+	 * @return points
+	 */
 	private int calculatePoints(Integer amount) {
 		
 		int points = 0;
