@@ -1,3 +1,6 @@
+/**
+ * Service package to define actual business logic
+ */
 package com.rewards.service;
 
 import java.util.ArrayList;
@@ -16,7 +19,9 @@ import com.rewards.exception.CustomerRewardPointException;
 import com.rewards.repository.CustomerRepository;
 import com.rewards.repository.CustomerTransactionRepository;
 
-//Service class implementation of actual CRUD related operations
+/**
+ * Service class implementation of actual CRUD related operations
+ */
 @Service(value = "customerService")
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -26,8 +31,10 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private CustomerTransactionRepository customertransactionrepo;
-
-	//Get the transaction details by providing transaction Id
+       
+	/**
+	 * Get the transaction details by providing transaction Id
+	 */
 	@Override
 	public CustomerTransactionDTO getCustomerTransactions(Integer transactId) throws CustomerRewardPointException {
 		Optional<CustomerTransaction> optional = customertransactionrepo.findById(transactId);
@@ -41,7 +48,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return customer2;
 	}
 
-	//Get all the transactions of all customers spent on which category with the amount and date
+	/**
+	 * Get all the transactions of all customers spent 
+	 * on which category with the amount and date
+	 */
 	@Override
 	public List<CustomerTransactionDTO> getAllCustomersTransactions() throws CustomerRewardPointException {
 		Iterable<CustomerTransaction> customers = customertransactionrepo.findAll();
@@ -60,7 +70,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return customers2;
 	}
 	
-	//Get the all Customers data 
+	/**
+	 * Get the all Customers data 
+	 */ 
 	@Override
 	public List<CustomerDTO> getAllCustomers() throws CustomerRewardPointException {
 		Iterable<Customer> customers = customerRepository.findAll();
@@ -78,7 +90,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return customers2;
 	}
 
-    //To create the Customer data in Customer table
+ 	/**
+	 * To create the Customer data in Customer table
+	 */
 	@Override
 	public Integer addCustomer(CustomerDTO customer) throws CustomerRewardPointException {
 		Customer customerEntity = new Customer();
@@ -90,7 +104,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerEntity2.getCustomerId();
 	}
 
-	//To update the Customer email Id by providing customerId
+	/**
+	 * To update the Customer email Id by providing customerId
+	 */
 	@Override
 	public void updateCustomer(Integer customerId, String emailId) throws CustomerRewardPointException {
 		// TODO Auto-generated method stub
@@ -99,7 +115,9 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setEmailId(emailId);		
 	}
 
-	//To delete the specific Customer data by providing customer ID
+	/**
+	 * To delete the specific Customer data by providing customer ID
+	 */
 	@Override
 	public void deleteCustomer(Integer customerId) throws CustomerRewardPointException {
 		// TODO Auto-generated method stub
