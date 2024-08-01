@@ -1,3 +1,6 @@
+/**
+ * Service package to define actual business logic
+ */
 package com.rewards.service;
 
 import java.util.List;
@@ -6,7 +9,9 @@ import com.rewards.dto.CustomerDTO;
 import com.rewards.dto.CustomerTransactionDTO;
 import com.rewards.exception.CustomerRewardPointException;
 
-//Customers and Customers transactions operations
+/**
+ * Customers and Customers transactions operations
+ */
 public interface CustomerService {
 	
 	public CustomerTransactionDTO getCustomerTransactions(Integer transactId) throws CustomerRewardPointException;
